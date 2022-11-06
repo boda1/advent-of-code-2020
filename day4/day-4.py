@@ -8,33 +8,28 @@ with open('./input.txt') as f:
     passportLines = f.readlines()
     for line in passportLines:
         if line != '\n':
+            # line = line.strip()
             line = line.replace('\n', ' ')
             currentValue += line
         else:
-            docsToCheck.append(currentValue)
+            docsToCheck.append(currentValue[:-1])
             currentValue = ''
     docsToCheck.append(currentValue)
 
-# print('docs to check: ', docsToCheck)
-
-# docsToCheckNoSpaces = [print(doc.split(' ')) for doc in docsToCheck]
-
-# print('Documents to be checked: ', docsToCheck[0].split(' '))
+print('Documents to be checked: ', docsToCheck[0].split(' '))
 
 D = [len(doc.split(' ')) for doc in docsToCheck]
 
-C = [(doc, 'valid') if len(doc.split(' ')) == 9 or (len(doc.split(' ')) == 8 and 'cid:' not in doc) else (doc, 'invalid') for doc in docsToCheck]
+C = ['valid' if len(doc.split(' ')) == 8 or (len(doc.split(' ')) == 7 and 'cid:' not in doc) else 'invalid' for doc in docsToCheck]
 
 
 for item in C:
-    if item[1] == 'valid':
+    if item == 'valid':
         validPassports = validPassports + 1
     else:
         None
 
-print(C)
-print(len(docsToCheck))
-print(validPassports)
+print("Number of valid passports: ", validPassports)
 
 # remove items in current passport from complete list of items in complete passport
 # check what remains in complete passport, valid passports are those with nothing or only 'cid' remaining
