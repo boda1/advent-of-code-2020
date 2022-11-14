@@ -21,7 +21,11 @@ with open('./input.txt') as f:
             currentValue = ''
     docsToCheck.append(currentValue)
 
+# Check whether each document has the required fields
+
 C = ['valid' if len(doc.split(' ')) == 8 or (len(doc.split(' ')) == 7 and 'cid:' not in doc) else 'invalid' for doc in docsToCheck]
+
+# Count number of valid documents
 
 for item in C:
     if item == 'valid':
@@ -31,7 +35,7 @@ for item in C:
 
 print("Number of valid passports: ", validPassports)
 
-# part 2, validating document field values
+# part 2, validating document the values of the fields in each document
 
 documentLists = [list(doc.split(' ')) for doc in docsToCheck]
 
